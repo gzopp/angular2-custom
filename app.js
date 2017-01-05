@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var appRoutes = require('./routes/app');
 
+
 var app = express();
 
 // view engine setup
@@ -30,11 +31,11 @@ app.use(function(req,res, next){
 
 app.use('/', appRoutes);
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
- res.render('index');
+  res.render('index');
 });
+
 
 
 module.exports = app;

@@ -5,16 +5,18 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('custom:server');
+var debug = require('debug')('schoolapp:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+//var port = normalizePort(process.env.PORT || '3000');
+var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || process.env.WEB_PORT || 3000;
+var ip = process.env.OPENSHIFT_NODEJS_IP || process.env.IP;
 app.set('port', port);
-
+app.set('ip', ip);
 /**
  * Create HTTP server.
  */
@@ -25,7 +27,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, ip);
 server.on('error', onError);
 server.on('listening', onListening);
 
